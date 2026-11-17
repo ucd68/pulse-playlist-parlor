@@ -1,14 +1,56 @@
-# Welcome to your Lovable project
+# Pulse
+
+Build a beautiful, premium Spotify-inspired music player website using React, Vite and Tailwind CSS.
+
+The website should use YouTube as its music source. Users should be able to search for songs, play YouTube music, import YouTube playlists, and manage their music queue.
+
+Include:
+
+Modern dark-themed Spotify-like UI.
+
+Sidebar with Home, Search, Library and Playlists.
+
+Album artwork and song information.
+
+Persistent bottom music player.
+
+Play, pause, next and previous controls.
+
+Playback progress bar and volume control.
+
+Shuffle and repeat.
+
+Recently played and liked songs.
+
+Make everything responsive, smooth and visually polished.
+
+IMPORTANT:
+
+Build the frontend and functional YouTube player first.
+
+Keep the music player persistent when navigating between pages.
+
+Use modular components and clean code.
+
+Do not implement Discord integration yet.
+
+Do not generate unnecessary files or complicated architecture.
+
+Make the application actually functional, not just a static UI.
+
+Start by creating the working project and implementing the core music player.
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://pulse-playlist-parlor.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/e64692bc-a93e-4405-8606-3f2673852142).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +62,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
