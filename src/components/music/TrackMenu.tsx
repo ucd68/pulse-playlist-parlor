@@ -23,9 +23,9 @@ export function TrackMenu({
   className,
 }: {
   track: Track;
-  onRemove?: () => void;
-  removeLabel?: string;
-  className?: string;
+  onRemove?: (() => void) | undefined;
+  removeLabel?: string | undefined;
+  className?: string | undefined;
 }) {
   const { addToQueue, playNext } = usePlayer();
   const { playlists, addToPlaylist, createPlaylist, isLiked, toggleLike } = useLibrary();

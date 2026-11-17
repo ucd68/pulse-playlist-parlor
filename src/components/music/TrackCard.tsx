@@ -46,8 +46,9 @@ export function PlayFab({
 export function TrackCard({ tracks, index }: { tracks: Track[]; index: number }) {
   const { current, isPlaying, playTracks, togglePlay } = usePlayer();
   const track = tracks[index];
-  const active = current?.id === track.id;
+  const active = !!track && current?.id === track.id;
   const play = () => (active ? togglePlay() : playTracks(tracks, index));
+  if (!track) return null;
 
   return (
     <MediaCard

@@ -10,11 +10,11 @@ export type Track = {
 export type Playlist = {
   id: string;
   name: string;
-  description?: string;
+  description?: string | undefined;
   tracks: Track[];
   createdAt: number;
   /** YouTube playlist id when imported */
-  sourceId?: string;
+  sourceId?: string | undefined;
 };
 
 export type RepeatMode = "off" | "all" | "one";

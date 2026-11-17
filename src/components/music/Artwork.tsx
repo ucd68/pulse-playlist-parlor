@@ -4,7 +4,7 @@ import { thumbnailUrl, type Track } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 /** Square album-art tile cropped from the YouTube thumbnail (hides its letterbox bars). */
-export function Artwork({ track, className }: { track?: Track | null; className?: string }) {
+export function Artwork({ track, className }: { track?: Track | null | undefined; className?: string | undefined }) {
   return (
     <div className={cn("relative aspect-square shrink-0 overflow-hidden rounded-md bg-muted", className)}>
       {track ? (
@@ -25,7 +25,7 @@ export function Artwork({ track, className }: { track?: Track | null; className?
 }
 
 /** 2x2 mosaic of the first tracks, like Spotify playlist covers. */
-export function PlaylistCover({ tracks, className }: { tracks: Track[]; className?: string }) {
+export function PlaylistCover({ tracks, className }: { tracks: Track[]; className?: string | undefined }) {
   if (tracks.length < 4) return <Artwork track={tracks[0]} className={className} />;
   return (
     <div className={cn("grid aspect-square shrink-0 grid-cols-2 overflow-hidden rounded-md bg-muted", className)}>

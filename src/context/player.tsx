@@ -419,7 +419,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
       <div
         aria-hidden={!showVideo}
         className={cn(
-          "fixed right-3 bottom-40 z-40 aspect-video w-64 overflow-hidden rounded-xl border border-border bg-card shadow-elevated transition-all duration-300 sm:w-80 md:bottom-28",
+          "fixed right-3 bottom-40 z-[60] aspect-video w-64 overflow-hidden rounded-xl border border-border bg-card shadow-elevated transition-all duration-300 sm:w-80 md:bottom-28",
           showVideo ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0",
         )}
       >

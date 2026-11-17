@@ -32,7 +32,7 @@ export function extractPlaylistId(input: string): string | null {
   const value = input.trim();
   if (!value) return null;
   const match = value.match(/[?&]list=([A-Za-z0-9_-]+)/);
-  if (match) return match[1];
+  if (match?.[1]) return match[1];
   if (/^[A-Za-z0-9_-]{10,64}$/.test(value)) return value;
   return null;
 }
@@ -73,7 +73,7 @@ function findDurationBadge(node: any): string | undefined {
  * Walks an InnerTube response and pulls out every playable video, plus the
  * continuation token for the next page when present.
  */
-export function extractTracks(root: unknown): { tracks: Track[]; continuation?: string } {
+export function extractTracks(root: unknown): { tracks: Track[]; continuation?: string | undefined } {
   const tracks: Track[] = [];
   const seen = new Set<string>();
   let continuation: string | undefined;

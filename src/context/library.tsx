@@ -5,6 +5,8 @@ import { pushRecent, toggleTrack } from "@/lib/library";
 import type { Playlist, Track } from "@/lib/types";
 
 type LibraryContextValue = {
+  /** False until saved data has been read from this browser. */
+  ready: boolean;
   liked: Track[];
   recent: Track[];
   playlists: Playlist[];
@@ -28,7 +30,7 @@ function newId() {
 export function LibraryProvider({ children }: { children: ReactNode }) {
   const [liked, setLiked] = usePersistentState<Track[]>("pulse:liked", []);
   const [recent, setRecent] = usePersistentState<Track[]>("pulse:recent", []);
-  const [playlists, setPlaylists] = usePersistentState<Playlist[]>("pulse:playlists", []);
+  const [playlists, setPlaylists, ready] = usePersistentState<Playlist[]>("pulse:playlists", []);
 
   const likedIds = useMemo(() => new Set(liked.map((t) => t.id)), [liked]);
 
@@ -77,6 +79,7 @@ export function LibraryProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo(
     () => ({
+      ready,
       liked,
       recent,
       playlists,
@@ -90,7 +93,7 @@ export function LibraryProvider({ children }: { children: ReactNode }) {
       addToPlaylist,
       removeFromPlaylist,
     }),
-    [liked, recent, playlists, isLiked, toggleLike, addRecent, clearRecent, createPlaylist, deletePlaylist, renamePlaylist, addToPlaylist, removeFromPlaylist],
+    [ready, liked, recent, playlists, isLiked, toggleLike, addRecent, clearRecent, createPlaylist, deletePlaylist, renamePlaylist, addToPlaylist, removeFromPlaylist],
   );
 
   return <LibraryContext.Provider value={value}>{children}</LibraryContext.Provider>;

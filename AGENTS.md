@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- YouTube search/playlist data comes from keyless InnerTube calls inside server functions (src/lib/youtube.functions.ts); parsing lives in src/lib/youtube-parse.ts so it can be tested without network.
+- Playback uses one YouTube IFrame player owned by PlayerProvider in __root, so audio survives navigation; never mount a second player.
+- Liked songs, history, playlists and the last queue are stored in the browser (localStorage) until accounts are requested.

@@ -25,7 +25,9 @@ export function shuffleQueue<T>(queue: T[], index: number, rand: () => number = 
   const rest = queue.filter((_, i) => i !== index);
   for (let i = rest.length - 1; i > 0; i--) {
     const j = Math.floor(rand() * (i + 1));
-    [rest[i], rest[j]] = [rest[j], rest[i]];
+    const tmp = rest[i] as T;
+    rest[i] = rest[j] as T;
+    rest[j] = tmp;
   }
   return current === undefined ? rest : [current, ...rest];
 }

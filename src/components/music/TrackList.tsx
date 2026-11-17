@@ -11,10 +11,10 @@ import { cn } from "@/lib/utils";
 type TrackListProps = {
   tracks: Track[];
   /** Called instead of the default "play this list from here". */
-  onPlay?: (index: number) => void;
-  onRemove?: (track: Track, index: number) => void;
-  removeLabel?: string;
-  showHeader?: boolean;
+  onPlay?: ((index: number) => void) | undefined;
+  onRemove?: ((track: Track, index: number) => void) | undefined;
+  removeLabel?: string | undefined;
+  showHeader?: boolean | undefined;
 };
 
 export function TrackList({ tracks, onPlay, onRemove, removeLabel, showHeader = true }: TrackListProps) {

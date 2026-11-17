@@ -8,10 +8,17 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
+import { useRouterState } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { MobileNav } from "@/components/layout/MobileNav";
+import { Sidebar } from "@/components/layout/Sidebar";
+import { PlayerBar } from "@/components/player/PlayerBar";
+import { Toaster } from "@/components/ui/sonner";
+import { LibraryProvider } from "@/context/library";
+import { PlayerProvider } from "@/context/player";
 
 function NotFoundComponent() {
   return (
@@ -81,16 +88,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Pulse — Stream music from YouTube" },
+      { name: "description", content: "Pulse is a sleek music player powered by YouTube: search, queue, like and import playlists." },
+      { property: "og:title", content: "Pulse — Stream music from YouTube" },
+      { property: "og:description", content: "Search, queue, like and import YouTube playlists in a sleek dark music player." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "theme-color", content: "#0b0d0c" },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Figtree:wght@400;500;600;700&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,
@@ -106,7 +118,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <HeadContent />
       </head>
@@ -123,8 +135,36 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <LibraryProvider>
+        <PlayerProvider>
+          <AppShell />
+        </PlayerProvider>
+      </LibraryProvider>
+      <Toaster position="top-center" />
     </QueryClientProvider>
+  );
+}
+
+/** Sidebar + scrolling page area + persistent player. Only <Outlet /> changes between pages. */
+function AppShell() {
+  const mainRef = useRef<HTMLElement>(null);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  useEffect(() => {
+    mainRef.current?.scrollTo({ top: 0 });
+  }, [pathname]);
+
+  return (
+    <div className="flex h-dvh flex-col bg-background">
+      <div className="flex min-h-0 flex-1 gap-2 md:p-2 md:pb-0">
+        <Sidebar />
+        <main ref={mainRef} className="scrollbar-thin relative min-w-0 flex-1 overflow-y-auto bg-card md:rounded-xl">
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+        </main>
+      </div>
+      <PlayerBar />
+      <MobileNav />
+    </div>
   );
 }
