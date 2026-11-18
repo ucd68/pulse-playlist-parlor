@@ -18,3 +18,18 @@ describe("buildActivity", () => {
     expect(buildActivity({ track: null, isPlaying: false, position: 0, duration: 0 })).toBeNull();
   });
 });
+
+// @ts-expect-error plain JS module
+import { toWebActivity } from "../../companion/presence.mjs";
+describe("toWebActivity", () => {
+  it("adds app id and converts buttons for Discord web", () => {
+    const a = toWebActivity(buildActivity({ track, isPlaying: true, position: 0, duration: 200 }), "123");
+    expect(a.application_id).toBe("123");
+    expect(a.name).toBe("Pulse");
+    expect(a.buttons).toEqual(["Listen on YouTube"]);
+    expect(a.metadata.button_urls).toEqual(["https://www.youtube.com/watch?v=abc"]);
+  });
+  it("null stays null (clears status)", () => {
+    expect(toWebActivity(null, "123")).toBeNull();
+  });
+});

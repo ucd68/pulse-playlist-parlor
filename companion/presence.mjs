@@ -30,3 +30,20 @@ export function buildActivity(state, now = Date.now()) {
   }
   return activity;
 }
+
+/**
+ * Converts a Discord RPC activity into the "local activity" shape that Discord's
+ * web client expects (what arRPC sends to the Vencord "WebRichPresence (arRPC)" plugin).
+ * @param {ReturnType<typeof buildActivity>} activity
+ * @param {string} clientId Discord application id
+ */
+export function toWebActivity(activity, clientId) {
+  if (!activity) return null;
+  const { buttons, ...rest } = activity;
+  const web = { ...rest, application_id: clientId, name: "Pulse", flags: 0 };
+  if (buttons?.length) {
+    web.buttons = buttons.map((b) => b.label);
+    web.metadata = { button_urls: buttons.map((b) => b.url) };
+  }
+  return web;
+}

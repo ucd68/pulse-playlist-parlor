@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 const LABEL: Record<DiscordStatus, string> = {
   off: "Off",
   "no-companion": "Companion app not running",
-  "no-discord": "Waiting for Discord app",
+  "no-discord": "Waiting for Discord (open discord.com with Vencord)",
   connected: "Showing on your Discord profile",
 };
 
@@ -44,13 +44,13 @@ export function DiscordButton() {
         </div>
         {enabled && status !== "connected" && (
           <div className="space-y-1 rounded-md bg-surface p-3 text-xs text-muted-foreground">
-            <p>Run the Pulse companion on this computer with Discord open:</p>
+            <p>Works with Discord in your browser. Install the Vencord extension, enable its "WebRichPresence (arRPC)" plugin, then run:</p>
             <code className="block rounded bg-background px-2 py-1 font-mono text-foreground">
               cd companion && npm install
               <br />
               DISCORD_CLIENT_ID=your_id npm start
             </code>
-            <p>See companion/README.md for setup.</p>
+            <p>Then reload the Discord tab. Full steps: companion/README.md</p>
           </div>
         )}
       </PopoverContent>
