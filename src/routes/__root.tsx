@@ -19,6 +19,7 @@ import { PlayerBar } from "@/components/player/PlayerBar";
 import { Toaster } from "@/components/ui/sonner";
 import { LibraryProvider } from "@/context/library";
 import { PlayerProvider } from "@/context/player";
+import { DiscordProvider } from "@/context/discord";
 
 function NotFoundComponent() {
   return (
@@ -137,7 +138,9 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <LibraryProvider>
         <PlayerProvider>
-          <AppShell />
+          <DiscordProvider>
+            <AppShell />
+          </DiscordProvider>
         </PlayerProvider>
       </LibraryProvider>
       <Toaster position="top-center" />

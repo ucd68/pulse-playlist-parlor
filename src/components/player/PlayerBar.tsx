@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { Artwork } from "@/components/music/Artwork";
 import { LikeButton } from "@/components/music/LikeButton";
+import { DiscordButton } from "@/components/player/DiscordButton";
 import { Controls } from "@/components/player/Controls";
 import { NowPlayingMobile } from "@/components/player/NowPlayingMobile";
 import { MiniProgress, ProgressBar } from "@/components/player/ProgressBar";
@@ -61,6 +62,7 @@ export function PlayerBar() {
           >
             <ListMusic className="h-4 w-4" />
           </Link>
+          <DiscordButton />
           <VolumeControl />
         </div>
       </div>

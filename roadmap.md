@@ -3,4 +3,4 @@
 - [ ] Library: liked songs, recently played, local playlists, YouTube playlist import
 - [ ] Responsive layout (sidebar desktop, bottom nav + full-screen player mobile)
 - [x] Name the app "Pulse"
-- [ ] Later (not now): Discord integration
+- [x] Discord Rich Presence via local companion (companion/)

@@ -1,0 +1,9 @@
+{
+  "name": "pulse-discord-companion",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Shows the song playing in Pulse on your Discord profile.",
+  "scripts": { "start": "node companion.mjs" },
+  "dependencies": { "ws": "^8.18.0" }
+}
